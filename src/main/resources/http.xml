@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+	<!-- http components configuration。 -->
+
+	<bean name="schemeRegistry" class="org.apache.http.conn.scheme.SchemeRegistry">
+		<property name="items">
+			<map>
+				<entry key="http">
+					<bean class="org.apache.http.conn.scheme.Scheme">
+						<constructor-arg index="0" value="http" />
+						<constructor-arg index="1" value="80" />
+						<constructor-arg index="2">
+							<bean class="org.apache.http.conn.scheme.PlainSocketFactory" factory-method="getSocketFactory" />
+						</constructor-arg>
+					</bean>
+				</entry>
+				<entry key="https">
+					<bean class="org.apache.http.conn.scheme.Scheme">
+						<constructor-arg index="0" value="https" />
+						<constructor-arg index="1" value="443" />
+						<constructor-arg index="2">
+							<bean class="org.apache.http.conn.ssl.SSLSocketFactory" factory-method="getSocketFactory" />
+						</constructor-arg>
+					</bean>
+				</entry>
+			</map>
+		</property>
+	</bean>
+
+	<bean name="clientConnectionManager" class="org.apache.http.impl.conn.tsccm.ThreadSafeClientConnManager"
+		destroy-method="shutdown">
+		<constructor-arg ref="schemeRegistry" />
+		<!-- 最大连接数 -->
+		<property name="maxTotal" value="10" />
+	</bean>
+
+	<bean class="org.apache.http.impl.client.DefaultHttpClient">
+		<constructor-arg index="0" ref="clientConnectionManager" />
+		<constructor-arg index="1">
+			<bean class="cn.clxy.studio.common.data.MyHttpParameters" />
+		</constructor-arg>
+	</bean>
+</beans>

@@ -1,0 +1,78 @@
+<html>
+<head>
+<style type="text/css">
+.test1 {
+	color: red;
+	font-weight: bold;
+}
+
+.test2 {
+	color: green;
+	font-weight: bold;
+}
+</style>
+<script type="text/javascript" src="js/jquery.js"></script>
+</head>
+<body>
+	<table>
+		<tr>
+			<td>11</td>
+			<td>12</td>
+			<td>13</td>
+			<td>14</td>
+		</tr>
+		<tr>
+			<td>21</td>
+			<td>22</td>
+			<td>23</td>
+			<td>24</td>
+		</tr>
+		<tr>
+			<td>31</td>
+			<td>32</td>
+			<td>33</td>
+			<td>34</td>
+		</tr>
+		<tr>
+			<td>41</td>
+			<td>42</td>
+			<td>43</td>
+			<td>44</td>
+		</tr>
+	</table>
+	<input type="button" value="click me!" id="btnRun" />
+	<script>
+		var rndArray = [ 3, 7, 11, 1, 12, 15 ];
+
+		function chageColor(index) {
+			console.log(index);
+			$("table td").eq(index).addClass("test1");
+		}
+
+		function chageColor2(index, callback) {
+			console.log(index);
+			$("table td").eq(index).addClass("test2");
+			if (callback) {
+				setTimeout(callback, 1000);
+			}
+		}
+
+		$("#btnRun").click(function() {
+
+			for ( var i = 0; i < rndArray.length; i++) {
+				setTimeout("chageColor(" + rndArray[i] + ")", 1000 * (i + 1));
+			}
+
+			var f = false;
+			$(rndArray.reverse()).each(function(i, v) {
+				f = (function(index, callback) {
+					return function() {
+						chageColor2(index, callback);
+					};
+				})(v, f);
+			});
+			f();
+		});
+	</script>
+</body>
+</html>

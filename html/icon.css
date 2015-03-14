@@ -1,0 +1,106 @@
+.hi-icon-effect-6 .hi-icon {
+    box-shadow: 0 0 0 4px rgba(255,255,255,1);
+    -webkit-transition: background 0.2s, color 0.2s;
+    -moz-transition: background 0.2s, color 0.2s;
+    transition: background 0.2s, color 0.2s;
+}
+
+.no-touch .hi-icon-effect-6 .hi-icon:hover {
+    background: rgba(255,255,255,1);
+    color: #64bb5d;
+}
+
+.no-touch .hi-icon-effect-6 .hi-icon:hover:before {
+    -webkit-animation: spinAround 2s linear infinite;
+    -moz-animation: spinAround 2s linear infinite;
+    animation: spinAround 2s linear infinite;
+}
+
+
+@-webkit-keyframes pendulum {
+    10%{
+        -webkit-transform: rotate(15deg)
+    }
+    30%{
+        -webkit-transform:rotate(-10deg)
+    }
+    50%{
+        -webkit-transform:rotate(5deg)
+    }
+    70%{
+        -webkit-transform:rotate(-5deg)
+    }
+    90%{ 
+        -webkit-transform:rotate(2deg)
+    }
+    100%{
+        -webkit-transform:rotate(0deg)
+    }
+}
+@-moz-keyframes pendulum {
+    10%{
+        -moz-transform:rotate(15deg)
+    }
+    30%{
+        -moz-transform:rotate(-10deg)
+    }
+    50%{
+        -moz-transform:rotate(5deg)
+    }
+    70%{
+        -moz-transform:rotate(-5deg)
+    }
+    90%{
+        -moz-transform:rotate(2deg)
+    }
+    100%{
+        -moz-transform:rotate(0deg)
+    }
+}
+
+@-o-keyframes pendulum {
+    10%{
+        -o-transform: rotate(15deg)
+    }
+    30%{
+        -o-transform:rotate(-10deg)
+    }
+    50%{
+        -o-transform:rotate(5deg)
+    }
+    70%{
+        -o-transform:rotate(-5deg)
+    }
+    90%{
+        -o-transform:rotate(2deg)
+    }
+    100%{
+        -o-transform:rotate(0deg)
+    }
+}
+@keyframes pendulum { 
+    10%{
+        transform: rotate(15deg)
+    }
+    30%{
+        transform:rotate(-10deg)
+    }
+    50%{
+        transform:rotate(5deg)
+    }
+    70%{
+        transform:rotate(-5deg)
+    }
+    90%{
+        transform:rotate(2deg)        
+    }
+    100%{
+        transform:rotate(0deg)
+    }
+}
+.pendulum {
+    -webkit-animation-name: pendulum;
+    -moz-animation-name: pendulum;
+    -o-animation-name: pendulum;
+    animation-name: pendulum
+}

@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:wicket="http://wicket.apache.org/dtds.data/wicket-xhtml1.4-strict.dtd">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+<script src="jquery.ClxyChart.js" type="text/javascript"></script>
+<title>CLXY Studio</title>
+<style type="text/css">
+canvas {
+	box-shadow: 0 2px 2px #aaa;
+	border-radius: 2px;
+}
+</style>
+</head>
+<body>
+
+	<h1>HTML 5 Canvas Chart by javascript</h1>
+	<ul>
+		<li><a href="http://jquery.com/">JQuery</a> plugin.</li>
+	</ul>
+	<div style="padding: 10px">
+		<canvas id="habCanvas" width="600" height="400"
+			style="background: rgba(0, 0, 255, 0.1)">
+			canvas.
+		</canvas>
+		<canvas id="testCanvas1" width="600" height="400">canvas.</canvas>
+		<br />
+		<canvas id="testCanvas2" width="500" height="300">canvas.</canvas>
+		<canvas id="testCanvas3" width="500" height="300">canvas.</canvas>
+	</div>
+	<script type="text/javascript"><!--/*--><![CDATA[/*><!--*/
+		$(function() {
+
+			var hc = $.ClxyChart("#habCanvas");
+			hc.add({
+				type : 'line',
+				color : "red",
+				lineWidth : 3,
+				refer : [{x : 0, y : 0}, {x : 300, y : 200}],
+				datas : [ {x : 20, y : 120, color : 'blue'}, {x : 80, y : 80}, {x : 120, y : 130}, {x : 160, y : 100}, {x : 200, y : 80}, {x : 280, y : 120} ]
+			});
+			hc.add({
+				type : 'line',
+				group : 1,
+				refer:[{ y : 0}, { y : 200}],
+				datas : [ {x : 1, y : 10}, {x : 4, y : 25, color : 'blue'}, {x : 2.5, y : 10, title : '魔兽世界'}, {x : 5, y : 50}, {x : 3, y : 30}, {x : 4, y : 40}, {x : 6, y : 80} ]
+			});
+			hc.add({
+				type : 'line',
+				group : 1,
+				datas : [ {x : 1, y : 25}, {x : 4.5, y : 35}, {x : 2, y : 8, title : '火炬之光'}, {x : 5, y : 80}, {x : 3, y : 90}, {x : 4.5, y : 30}, {x : 6, y : 65} ]
+			});
+			hc.add({
+				type : 'line',
+				group : 2,
+				refer : [{x : 1, y : -15000}, { y : 10000}],
+				datas : [ {x : 1, y : 2500}, {x : 4, y : 3500}, {x : 2, y : 800, title : '半休だから'}, {x : 5, y : 4000}, {x : 3, y : 9000, title : '残業だから'}, {x : 4, y : 3000}, {x : 6, y : 600, title:'くびだから'} ]
+			});
+			hc.params.padding = 0.05;
+			hc.params.axisOn = true;
+			hc.effects.titleOn = true;
+			//hc.groups['undefined'].axis.on = false;
+			//hc.groups['2'].axis.on = true;
+			hc.draw();
+			var hc1 = $.ClxyChart("#testCanvas1");
+			hc1.add({
+				type : 'pie',
+				color : "#006cff",
+				refer : {x : 100},
+				radius : 100,
+				datas : [ {value : 0.1, color : '#93bbf4'}, {value : 0.2, color : '#ff6600'}, {value : 0.3, color : '#34a038'}, {value : 0.4} ]
+			});
+			hc1.add({
+				type : 'pie',
+				datas : [ {value : 0.1}, {value : 0.2, title : 'WOW'}, {value : 0.3}, {value : 0.15}, {value : 0.2} ]
+			});
+			hc1.params.axisOn = false;
+			hc1.draw();
+			var hc2 = $.ClxyChart("#testCanvas2");
+			hc2.add({
+				type : 'bar',
+				color : "#93bbf4",
+				refer : {y : 0},
+				datas : [ {y : 0.1}, {y : -0.2, title : 'なんだ！'}, {y : -0.1}, {y : 0.4} ]
+			});
+			hc2.add({
+				type : 'bar',
+				//color : "#006cff",
+				refer : {y : 0},
+				datas : [ {y : 0.2}, {y : -0.15, title : 'あれだ！'}, {y : -0.09}, {y : 0.5}, { x : 'WOW!', y : 0.6} ]
+			});
+			hc2.add({
+				type : 'bar-ignore',
+				//refer : {y : 100},
+				datas : [ {y : 0}, {y : -10, color : '#93bbf4'}, {y : 200}, {y : 130}, {y : 0} ]
+			});
+			hc2.add({
+				type : 'line',
+				group : 'line',
+				refer : [{x : 1, y : -15000}, { y : 10000}],
+				datas : [ {x : 1, y : 2500}, {x : 4, y : 3500}, {x : 2, y : 800, title : '半休だから'}, {x : 5, y : 4000}, {x : 3, y : 9000, title : '残業だから'}, {x : 4, y : 3000}, {x : 6, y : 600, title:'くびだから'} ]
+			});
+			hc2.groups['line'].axis.on = false;
+			hc2.draw();
+			var hc3 = $.ClxyChart("#testCanvas3");
+			hc.add({
+				type : 'point',
+				refer : [{x : 0, y : 0}, {x : 300, y : 200}],
+				datas : [ {x : 20, y : 120, color : 'blue'}, {x : 80, y : 80}, {x : 120, y : 130}, {x : 160, y : 100}, {x : 200, y : 80}, {x : 280, y : 120} ]
+			});
+			hc3.params.endPointR = 10;
+			hc3.draw();
+		});
+	/*-->]]>*/
+	</script>
+</body>
+</html>

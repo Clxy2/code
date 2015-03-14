@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8" />
+<style type="text/css">
+body {
+	font: 0.875em/1 Arial;
+}
+
+#wrapper {
+	position: relative;
+	height: 198px;
+	width: 400px;
+	padding: 10px;
+	overflow-y: scroll;
+	border: 20px solid #0a0;
+}
+
+#box {
+	border: 10px solid #a00;
+	height: 200px;
+	width: 200px;
+	margin: 20px auto;
+}
+
+.appended-box {
+	border: 10px solid #00a;
+	height: 200px;
+	width: 200px;
+	margin: 40px auto;
+}
+</style>
+</head>
+
+<body>
+	<p>some text.</p>
+	<div id="wrapper">
+		<i>#wrapper</i>
+		<div id="box">
+			<i>#box</i>
+		</div>
+	</div>
+	<p>
+		#box上边框相对#wrapper上边框距离: <span id="offset-top"></span>px
+	</p>
+	<p>
+		#box下边框相对#wrapper下边框距离: <span id="offset-bottom"></span>px
+	</p>
+</body>
+
+<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+<script type="text/javascript">
+	$(function() {
+
+		var box = $("#box");
+		var wrapper = $("#wrapper");
+
+		var boxMargin = parseInt(box.css("margin"));
+		var boxBorder = parseInt(box.css("border-top-width"));
+		var wrapperPadding = parseInt(wrapper.css("padding"));
+		var boxHeight = box.height();
+		var wrapperHeight = wrapper.height();
+
+		box.draggable({
+			stop : function(event, ui) {
+				var top = Math.round(box.position().top) + boxMargin;
+				$('#offset-top').text(top);
+				$('#offset-bottom').text(
+						wrapperHeight + wrapperPadding * 2 - (boxHeight + top + boxBorder * 2));
+			}
+		});
+	});
+</script>
+</html>
